@@ -1,5 +1,6 @@
 pkgname=fnn-share-git
 _pkgname=fnn-share
+_gitname=share
 epoch=1
 pkgver=git
 pkgrel=1
@@ -16,13 +17,15 @@ provides=("#{_pkgname}")
 conflicts=("#{_pkgname}")
 
 prepare() {
-  mv "${srcdir}/${_pkgname}-master" "${srcdir}/${_pkgname}"
+  mv "${srcdir}/${_gitname}-master" "${srcdir}/${_pkgname}"
 }
 
 build() {
+  cd "${srcdir}/${_pkgname}"
 }
 
 package() {
   cd "${srcdir}/${_pkgname}"
+  mkdir -p ${pkgdir}/usr/bin/
   cp share ${pkgdir}/usr/bin/
 }
