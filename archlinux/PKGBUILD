@@ -1,0 +1,28 @@
+pkgname=fnn-share-git
+_pkgname=fnn-share
+epoch=1
+pkgver=git
+pkgrel=1
+pkgdesc='CLI uploader for f.nn.lv, the bullshit free file hosting'
+url='https://github.com/manpages/share.git'
+arch=('i686' 'x86_64')
+license=('MIT')
+depends=('httpie')
+makedepends=('git')
+source=('https://github.com/manpages/share/archive/master.tar.gz')
+sha1sums=('SKIP')
+
+provides=("#{_pkgname}")
+conflicts=("#{_pkgname}")
+
+prepare() {
+  mv "${srcdir}/${_pkgname}-master" "${srcdir}/${_pkgname}"
+}
+
+build() {
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}"
+  cp share ${pkgdir}/usr/bin/
+}

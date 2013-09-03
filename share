@@ -1,0 +1,11 @@
+#!/bin/sh
+# requires httpie: https://github.com/jkbr/httpie
+share_do() {
+  [ ! -f $1 ] && echo "File “${1}” not found." || \
+    http --form POST f.nn.lv file@$1  | \
+      grep -o 'value=".*" id="short"' | \
+      grep -o 'http://nn.lv/[a-z0-9]*' || echo "Failed to upload “${1}”." 
+}
+[ -z $1 ] && \
+  echo 'Usage: share FILE' || \
+  share_do $1
